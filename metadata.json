@@ -1,0 +1,6 @@
+{
+  "name": "EnglishVerse – World of English Language & Literature",
+  "description": "Department of English, Madha Arts and Science College — A luxury literary web portal with interactive 3D book page-turning, digital library, timelines, poetry atelier, grammar lab, and quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

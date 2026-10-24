@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnglishVerse – Department of English | Madha Arts and Science College</title>
+    <meta name="description" content="Official digital portal of the Department of English, Madha Arts and Science College. Featuring realistic 3D book page-turning, digital library, literature timelines, poetry studio, and grammar lab." />
+    <meta property="og:title" content="EnglishVerse – Department of English | Madha Arts and Science College" />
+    <meta property="og:description" content="Explore an exhibition-grade interactive world of classical literature, 3D books, poetry, and grammar at Madha Arts and Science College." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Background Atmospheric Particles & Ambient Glow -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="ambient-light-top" aria-hidden="true"></div>
+
+    <!-- Audio Toast Status -->
+    <div id="audio-toast" class="audio-toast" role="status" aria-live="polite">
+      <span id="audio-toast-icon">🔊</span>
+      <span id="audio-toast-msg">Audio enabled</span>
+    </div>
+
+    <!-- ==========================================================================
+         Top Bar Navigation Contract (Zone 1: Brand, Zone 2: Links, Zone 3: CTA/Tools)
+         ========================================================================== -->
+    <header class="site-header">
+      <div class="nav-container">
+        <!-- Zone 1: Single Brand Wordmark -->
+        <a href="#hero" class="brand-wordmark" aria-label="EnglishVerse - Madha Arts and Science College">
+          <img src="/images/crest.jpg" alt="Madha Arts and Science College Department Seal" class="brand-crest-icon" />
+          <span>EnglishVerse<span class="brand-suffix">.edu</span></span>
+        </a>
+
+        <!-- Zone 2: 5 Nav Links (Single line) -->
+        <nav class="main-nav" id="main-nav" aria-label="Main Navigation">
+          <a href="#book-section" class="nav-link">3D Tome</a>
+          <a href="#library-section" class="nav-link">Digital Library</a>
+          <a href="#explorer-section" class="nav-link">Literary Eras</a>
+          <a href="#poetry-section" class="nav-link">Poetry Studio</a>
+          <a href="#grammar-section" class="nav-link">Grammar Lab</a>
+          <a href="#quiz-section" class="nav-link">Quiz</a>
+          <a href="#dept-section" class="nav-link">Department</a>
+        </nav>
+
+        <!-- Zone 3: 1 Primary CTA & Essential Controls -->
+        <div class="header-actions">
+          <!-- Page Flip Sound Toggle -->
+          <button id="sound-toggle-btn" class="btn-icon" aria-label="Toggle Page-Turn Audio" title="Toggle Page Flip Sound">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+
+          <!-- Ambient Library Sound Toggle -->
+          <button id="ambient-toggle-btn" class="btn-icon" aria-label="Toggle Ambient Library Atmosphere" title="Toggle Library Ambience">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 18V5l12-2v13"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+          </button>
+
+          <!-- Theme Toggle (Dark Academy / Ivory Parchment) -->
+          <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle Light / Dark Academic Theme" title="Toggle Ivory / Midnight Theme">
+            <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <!-- Primary CTA Button -->
+          <a href="#book-section" class="btn-primary-cta">Explore Tome</a>
+
+          <!-- Mobile Menu Hamburger -->
+          <button id="mobile-menu-btn" class="btn-icon mobile-menu-btn" aria-label="Open Mobile Menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-drawer" class="mobile-nav-drawer" aria-hidden="true">
+        <a href="#book-section" class="nav-link mobile-link">3D Interactive Tome</a>
+        <a href="#library-section" class="nav-link mobile-link">Digital Library</a>
+        <a href="#explorer-section" class="nav-link mobile-link">Literary Eras &amp; Authors</a>
+        <a href="#poetry-section" class="nav-link mobile-link">Poetry Studio</a>
+        <a href="#grammar-section" class="nav-link mobile-link">Grammar Lab</a>
+        <a href="#quiz-section" class="nav-link mobile-link">Scholarly Quiz</a>
+        <a href="#dept-section" class="nav-link mobile-link">Department &amp; Faculty</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ==========================================================================
+           Section 1: Hero Section (Where Words Become Worlds)
+           ========================================================================== -->
+      <section id="hero" class="hero-section">
+        <img src="/images/hero-library.jpg" alt="Grand Collegiate Academic Library" class="hero-backdrop-img" />
+        <div class="hero-vignette"></div>
+
+        <div class="container">
+          <div class="hero-grid">
+            <!-- Left Hero Content -->
+            <div class="hero-content">
+              <div class="hero-eyebrow">
+                <span>Madha Arts and Science College</span>
+                <span aria-hidden="true">·</span>
+                <span>Department of English</span>
+              </div>
+              <h1 class="hero-title">
+                Where Words<br />
+                Become <em>Worlds.</em>
+              </h1>
+              <p class="hero-description text-balance">
+                Step inside the digital literary exhibition of the Department of English at Madha Arts and Science College. Explore Shakespearean drama, Romantic verse, Victorian narratives, and syntax mastery designed to inspire students and scholars.
+              </p>
+              <div class="hero-btn-group">
+                <a href="#book-section" class="btn-primary-cta">Turn the 3D Pages</a>
+                <a href="#library-section" class="btn-secondary">
+                  <span>Browse Library Shelves</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+                <a href="#quiz-section" class="btn-secondary">Test Literary Acumen</a>
+              </div>
+              <div class="hero-metadata-strip">
+                <span>Madha Arts and Science College</span>
+                <span class="sep">·</span>
+                <span>Affiliated to University of Madras</span>
+                <span class="sep">·</span>
+                <span>The English Review</span>
+              </div>
+            </div>
+
+            <!-- Right Hero 3D Floating Book Visual -->
+            <div class="hero-book-viewport" id="hero-book-container">
+              <div class="hero-book-3d-cluster" id="hero-floating-book" title="Click or hover to tilt the Tome">
+                <!-- Book Cover Front -->
+                <div class="hero-book-cover">
+                  <div class="hero-book-cover-foil">
+                    <img src="/images/crest.jpg" alt="Madha Arts and Science College Department Crest" class="hero-book-crest" />
+                    <h2 class="hero-book-cover-title">THE COMPENDIUM OF ENGLISH</h2>
+                    <p class="hero-book-cover-subtitle">Madha Arts &amp; Science College</p>
+                  </div>
+                  <div class="hero-book-cover-footer">
+                    <span>“Litera Scripta Manet” — The Written Word Remains</span>
+                  </div>
+                </div>
+
+                <!-- Book Spine & 3D Layered Page Stack -->
+                <div class="hero-book-spine"></div>
+                <div class="hero-book-pages-stack"></div>
+
+                <!-- Realistic Soft Drop Shadow Beneath Book -->
+                <div class="hero-book-shadow"></div>
+              </div>
+
+              <!-- Drifting Golden Literary Glyphs -->
+              <div class="floating-glyph glyph-1" aria-hidden="true">𝔈</div>
+              <div class="floating-glyph glyph-2" aria-hidden="true">§</div>
+              <div class="floating-glyph glyph-3" aria-hidden="true">¶</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 2: Realistic 3D Interactive Book (The Tome of Literature)
+           ========================================================================== -->
+      <section id="book-section" class="book-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">Interactive 3D Physical Simulation</p>
+            <h2 class="section-title">The Grand Tome of English Literature</h2>
+            <p class="section-subtitle text-balance">
+              Experience authentic CSS 3D page-turning physics. Turn the parchment leaves using the navigation buttons, dog-ear page corners, or keyboard arrow keys.
+            </p>
+          </div>
+
+          <div class="book-stage-wrapper">
+            <!-- 3D Book Stage -->
+            <div class="book-stage" id="book-stage" aria-label="Interactive 3D Open Book">
+              <div class="book-tome" id="book-tome">
+                <!-- Dark Wood Book Spine -->
+                <div class="book-spine-back"></div>
+
+                <!-- Left & Right Hardbound Covers -->
+                <div class="book-cover-left-base"></div>
+                <div class="book-cover-right-base"></div>
+
+                <!-- Static Background Paper Beds beneath leaves -->
+                <div class="book-paper-bed-left">
+                  <div class="ex-libris-plate">
+                    <img src="/images/crest.jpg" alt="Madha Arts and Science College Seal" class="ex-libris-crest" />
+                    <div class="ex-libris-title">EX LIBRIS</div>
+                    <div style="font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ink-on-parchment-muted); margin-bottom: 0.4rem;">
+                      MADHA ARTS AND SCIENCE COLLEGE
+                    </div>
+                    <div class="ex-libris-sub">Department of English Language &amp; Literature</div>
+                    <div style="font-size: 0.68rem; color: var(--gold-dark); margin-top: 0.5rem; border-top: 1px dashed var(--gold-border); padding-top: 0.35rem;">
+                      Affiliated to University of Madras · Chennai
+                    </div>
+                  </div>
+                </div>
+                <div class="book-paper-bed-right"></div>
+
+                <!-- LEAF 1: Pages 1 & 2 -->
+                <div class="page-leaf" id="leaf-1" style="z-index: 6;">
+                  <!-- Front: Page 1 -->
+                  <div class="page-face page-front" id="page-1">
+                    <div class="page-header-meta">
+                      <span>Madha Arts &amp; Science College</span>
+                      <span>Folio I</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Sovereign Majesty of <em>English Literature</em></h3>
+                      <p class="page-prose drop-cap">
+                        Literature is the immortal mirror of human consciousness. From the fire-lit mead halls of Anglo-Saxon England to modern global post-colonial tapestries, English literature captures humanity's greatest struggles, joys, philosophies, and aesthetic wonders.
+                      </p>
+                      <div class="page-inset-card">
+                        <strong>The Three Pillars of Literary Study:</strong>
+                        <ul style="padding-left: 1.2rem; margin-top: 0.35rem; line-height: 1.5;">
+                          <li><strong>Historical Context:</strong> Understanding sociopolitical movements.</li>
+                          <li><strong>Structural Anatomy:</strong> Form, meter, syntax, and rhetoric.</li>
+                          <li><strong>Hermeneutic Depth:</strong> Critical interpretation and human meaning.</li>
+                        </ul>
+                      </div>
+                      <p class="page-prose-secondary">
+                        As Dr. Samuel Johnson famously noted, “The only end of writing is to enable the readers better to enjoy life, or better to endure it.”
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Chapter I: Introduction</span>
+                      <span>Page 1</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 2 -->
+                  <div class="page-face page-back" id="page-2">
+                    <div class="page-header-meta">
+                      <span>Foundational Canons</span>
+                      <span>Folio II</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Evolution of the <em>English Tongue</em></h3>
+                      <p class="page-prose">
+                        The English language is an extraordinary synthesis of Germanic roots and Romance vocabulary. Following the Norman Conquest in 1066, Anglo-Saxon merged with Anglo-Norman French, enriching our lexicon with nuanced synonyms (e.g., Anglo-Saxon <em>hearty</em> vs. French <em>cordial</em>).
+                      </p>
+                      <div class="page-quote">
+                        “Words are things, and a small drop of ink, falling like dew, upon a thought, produces that which makes thousands, perhaps millions, think.”
+                        <div style="font-size: 0.8rem; margin-top: 0.3rem; font-style: normal; color: var(--accent-crimson);">— Lord Byron, Don Juan</div>
+                      </div>
+                      <p class="page-prose-secondary">
+                        Through the printing press of William Caxton (1476) and the Great Vowel Shift, English emerged as the flexible, expressive medium of global thought.
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Linguistic Heritage</span>
+                      <span>Page 2</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+                <!-- LEAF 2: Pages 3 & 4 -->
+                <div class="page-leaf" id="leaf-2" style="z-index: 5;">
+                  <!-- Front: Page 3 -->
+                  <div class="page-face page-front" id="page-3">
+                    <div class="page-header-meta">
+                      <span>Great Authors</span>
+                      <span>Folio III</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Bard of Avon: <em>William Shakespeare</em></h3>
+                      <p class="page-prose drop-cap">
+                        No single figure has exerted greater influence upon world literature than William Shakespeare (1564–1616). Across 38 plays and 154 sonnets, his profound grasp of psychological interiority invented modern dramatic characterization.
+                      </p>
+                      <div class="page-inset-card">
+                        <strong>Linguistic Innovation:</strong>
+                        Shakespeare coined over 1,700 words into English, including <em>swagger, lonely, dwindle, majestic, assassination,</em> and <em>eyeball</em>.
+                      </div>
+                      <p class="page-prose-secondary">
+                        From Hamlet's existential soliloquies to the tragic downfall of King Lear, Shakespearean drama remains the pinnacle of poetic tragedy.
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Renaissance Titans</span>
+                      <span>Page 3</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 4 -->
+                  <div class="page-face page-back" id="page-4">
+                    <div class="page-header-meta">
+                      <span>Literary Masters</span>
+                      <span>Folio IV</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">Irony &amp; Society: <em>Jane Austen</em></h3>
+                      <p class="page-prose">
+                        Jane Austen (1775–1817) transformed the novel into an exquisite instrument of social critique, moral comedy, and free indirect discourse. Her masterworks examine class, marriage, and personal autonomy in Regency England.
+                      </p>
+                      <div class="page-quote">
+                        “It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.”
+                        <div style="font-size: 0.8rem; margin-top: 0.3rem; font-style: normal; color: var(--accent-crimson);">— Pride and Prejudice (1813)</div>
+                      </div>
+                      <p class="page-prose-secondary">
+                        Through Elizabeth Bennet and Emma Woodhouse, Austen demonstrated that quiet domestic settings could harbor profound human insights.
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Regency Brilliance</span>
+                      <span>Page 4</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+                <!-- LEAF 3: Pages 5 & 6 -->
+                <div class="page-leaf" id="leaf-3" style="z-index: 4;">
+                  <!-- Front: Page 5 -->
+                  <div class="page-face page-front" id="page-5">
+                    <div class="page-header-meta">
+                      <span>Historical Epochs</span>
+                      <span>Folio V</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Great <em>Literary Epochs</em></h3>
+                      <p class="page-prose drop-cap">
+                        English literature is traditionally categorized into distinctive chronological movements, each reacting against its predecessors and reflecting pivotal cultural upheavals:
+                      </p>
+                      <div class="page-inset-card">
+                        <p><strong>• Old English (450–1066):</strong> Heroic alliterative epics; <em>Beowulf</em>, <em>The Wanderer</em>.</p>
+                        <p style="margin-top: 0.25rem;"><strong>• Middle English (1066–1500):</strong> Chivalric romance &amp; Chaucer's human panorama; <em>Canterbury Tales</em>.</p>
+                        <p style="margin-top: 0.25rem;"><strong>• Early Modern / Renaissance (1500–1660):</strong> Humanist flowering, Marlowe, Shakespeare, Spenser.</p>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Timeline: Part I</span>
+                      <span>Page 5</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 6 -->
+                  <div class="page-face page-back" id="page-6">
+                    <div class="page-header-meta">
+                      <span>Modern Movements</span>
+                      <span>Folio VI</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">From Romanticism to <em>Modernism</em></h3>
+                      <p class="page-prose">
+                        The late 18th to mid-20th centuries witnessed breathtaking revolutions in form, emotion, and philosophical inquiry:
+                      </p>
+                      <div class="page-inset-card">
+                        <p><strong>• Romanticism (1798–1837):</strong> Nature, the sublime, individual emotional autonomy; Wordsworth, Keats, Shelley.</p>
+                        <p style="margin-top: 0.25rem;"><strong>• Victorian Era (1837–1901):</strong> Industrial expansion, moral earnestness, serialization; Dickens, Eliot, Tennyson.</p>
+                        <p style="margin-top: 0.25rem;"><strong>• Modernism (1901–1945):</strong> Stream of consciousness, fragmentation; Woolf, Joyce, Eliot.</p>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Timeline: Part II</span>
+                      <span>Page 6</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+                <!-- LEAF 4: Pages 7 & 8 -->
+                <div class="page-leaf" id="leaf-4" style="z-index: 3;">
+                  <!-- Front: Page 7 -->
+                  <div class="page-face page-front" id="page-7">
+                    <div class="page-header-meta">
+                      <span>Poetics &amp; Verse</span>
+                      <span>Folio VII</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Architecture of <em>Poetic Form</em></h3>
+                      <p class="page-prose drop-cap">
+                        Poetry is language concentrated to its purest musical and emotive essence. English verse is governed by rhythmic meters, most notably <em>iambic pentameter</em>—five metrical feet of unstressed followed by stressed syllables (da-DUM da-DUM).
+                      </p>
+                      <div class="page-inset-card">
+                        <strong>The English (Shakespearean) Sonnet:</strong>
+                        <p>14 lines structured into three quatrains (abab cdcd efef) followed by a climactic concluding rhyming couplet (gg). The thematic shift or turning point is known as the <em>volta</em>.</p>
+                      </div>
+                      <p class="page-prose-secondary">
+                        “Shall I compare thee to a summer's day? / Thou art more lovely and more temperate...”
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Prosody &amp; Meter</span>
+                      <span>Page 7</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 8 -->
+                  <div class="page-face page-back" id="page-8">
+                    <div class="page-header-meta">
+                      <span>Literary Devices</span>
+                      <span>Folio VIII</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">Mastery of <em>Figurative Language</em></h3>
+                      <p class="page-prose">
+                        Figurative devices allow writers to transcend literal description, transforming abstract thoughts into tangible sensory encounters:
+                      </p>
+                      <div class="page-inset-card">
+                        <p><strong>Metaphor:</strong> Direct symbolic identification (“Time is a beggar”).</p>
+                        <p style="margin-top: 0.2rem;"><strong>Simile:</strong> Comparison using 'like' or 'as' (“As idle as a painted ship”).</p>
+                        <p style="margin-top: 0.2rem;"><strong>Personification:</strong> Endowing inanimate entities with human agency.</p>
+                        <p style="margin-top: 0.2rem;"><strong>Alliteration:</strong> Repetition of initial consonant sounds for sonic rhythm.</p>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Rhetorical Craft</span>
+                      <span>Page 8</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+                <!-- LEAF 5: Pages 9 & 10 -->
+                <div class="page-leaf" id="leaf-5" style="z-index: 2;">
+                  <!-- Front: Page 9 -->
+                  <div class="page-face page-front" id="page-9">
+                    <div class="page-header-meta">
+                      <span>Linguistic Craft</span>
+                      <span>Folio IX</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Precision of <em>English Grammar</em></h3>
+                      <p class="page-prose drop-cap">
+                        Grammar is not a system of sterile constraints, but the architectural framework that grants thoughts clarity, musical cadence, and rhetorical power.
+                      </p>
+                      <div class="page-inset-card">
+                        <strong>The Eight Parts of Speech:</strong>
+                        <p class="text-balance" style="margin-top: 0.25rem; font-size: 0.8rem;">
+                          Noun (entity), Pronoun (substitute), Verb (action/state), Adjective (modifier), Adverb (qualifier), Preposition (spatial/temporal relation), Conjunction (connector), Interjection (exclamation).
+                        </p>
+                      </div>
+                      <p class="page-prose-secondary">
+                        Mastery of subordinating and coordinating conjunctions enables the composition of balanced periodic sentences that captivate the reader's intellect.
+                      </p>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Syntax Foundations</span>
+                      <span>Page 9</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 10 -->
+                  <div class="page-face page-back" id="page-10">
+                    <div class="page-header-meta">
+                      <span>Stylistic Mastery</span>
+                      <span>Folio X</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">Voice, Tone &amp; <em>Punctuation Art</em></h3>
+                      <p class="page-prose">
+                        Punctuation marks are the musical notation of prose. A semicolon bridges closely linked thoughts; an em-dash creates dramatic suspension; the Oxford comma preserves essential syntactic clarity.
+                      </p>
+                      <div class="page-inset-card">
+                        <strong>Active vs. Passive Voice Nuance:</strong>
+                        <p>• <em>Active:</em> “The scholar deciphered the ancient manuscript.” (Direct vigor)</p>
+                        <p>• <em>Passive:</em> “The ancient manuscript was deciphered in 1842.” (Emphasis on the artifact rather than the agent)</p>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Rhetorical Polish</span>
+                      <span>Page 10</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+                <!-- LEAF 6: Pages 11 & 12 -->
+                <div class="page-leaf" id="leaf-6" style="z-index: 1;">
+                  <!-- Front: Page 11 -->
+                  <div class="page-face page-front" id="page-11">
+                    <div class="page-header-meta">
+                      <span>The Living Canon</span>
+                      <span>Folio XI</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">Monumental Works of <em>World Renown</em></h3>
+                      <p class="page-prose drop-cap">
+                        A great literary work is never exhausted; each generation discovers fresh insights within its pages. Consider these foundational milestones:
+                      </p>
+                      <div class="page-inset-card">
+                        <p><strong>1. Paradise Lost (John Milton, 1667):</strong> Grand epic blank verse examining free will, fall, and cosmic reconciliation.</p>
+                        <p style="margin-top: 0.25rem;"><strong>2. Great Expectations (Charles Dickens, 1861):</strong> A masterclass in Victorian Bildungsroman and class identity.</p>
+                        <p style="margin-top: 0.25rem;"><strong>3. Mrs Dalloway (Virginia Woolf, 1925):</strong> Modernist interiority across a single London day.</p>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Literary Monuments</span>
+                      <span>Page 11</span>
+                    </div>
+                    <div class="corner-hint" title="Click corner to turn page"></div>
+                  </div>
+
+                  <!-- Back: Page 12 -->
+                  <div class="page-face page-back" id="page-12">
+                    <div class="page-header-meta">
+                      <span>Academic Horizon</span>
+                      <span>Folio XII</span>
+                    </div>
+                    <div class="page-body-content">
+                      <h3 class="page-heading">The Scholarly Journey <em>Ahead</em></h3>
+                      <p class="page-prose">
+                        You have traversed the introductory leaves of the Grand Tome. Continue your exploration across EnglishVerse through our digital bookshelf library, interactive era timelines, poetry atelier, and diagnostic quiz.
+                      </p>
+                      <div class="page-quote">
+                        “A room without books is like a body without a soul.”
+                        <div style="font-size: 0.8rem; margin-top: 0.3rem; font-style: normal; color: var(--accent-crimson);">— Marcus Tullius Cicero</div>
+                      </div>
+                      <div style="text-align: center; margin-top: 1rem;">
+                        <a href="#library-section" class="btn-primary-cta" style="font-size: 0.75rem; padding: 0.4rem 1rem;">Visit Digital Library Shelves</a>
+                      </div>
+                    </div>
+                    <div class="page-footer-meta">
+                      <span>Conclusion &amp; Index</span>
+                      <span>Page 12</span>
+                    </div>
+                    <div class="corner-hint-left" title="Click corner to turn back"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Book Navigation Controls Bar -->
+            <div class="book-controls-bar">
+              <button id="book-prev-btn" class="book-nav-btn" disabled aria-label="Previous Page">
+                <span aria-hidden="true">←</span>
+                <span>Previous Page</span>
+              </button>
+
+              <div class="book-page-indicator">
+                <span id="current-page-text">Pages 1 – 2</span> of <span class="tabular-nums">12</span>
+              </div>
+
+              <button id="book-next-btn" class="book-nav-btn" aria-label="Next Page">
+                <span>Next Page</span>
+                <span aria-hidden="true">→</span>
+              </button>
+
+              <!-- Table of Contents Jump Selector -->
+              <select id="book-toc-select" class="toc-select" aria-label="Jump to Chapter">
+                <option value="0">Chapter 1: Introduction (pp. 1-2)</option>
+                <option value="1">Chapter 2: Shakespeare &amp; Austen (pp. 3-4)</option>
+                <option value="2">Chapter 3: Literary Epochs (pp. 5-6)</option>
+                <option value="3">Chapter 4: Poetry &amp; Devices (pp. 7-8)</option>
+                <option value="4">Chapter 5: Grammar Precision (pp. 9-10)</option>
+                <option value="5">Chapter 6: Monumental Works (pp. 11-12)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 3: Interactive Digital Library (Bookshelves)
+           ========================================================================== -->
+      <section id="library-section" class="library-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">The Academic Archives</p>
+            <h2 class="section-title">Interactive Digital Library</h2>
+            <p class="section-subtitle text-balance">
+              Explore 3D books arranged on hand-carved mahogany shelves. Filter by discipline, search titles, or select any volume to examine its critical synopsis and author biography.
+            </p>
+          </div>
+
+          <!-- Filter & Search Controls -->
+          <div class="library-filter-bar">
+            <div class="filter-tabs" role="tablist" aria-label="Library Categories">
+              <button class="filter-tab-btn active" data-category="all" role="tab" aria-selected="true">All Works</button>
+              <button class="filter-tab-btn" data-category="Literature" role="tab" aria-selected="false">Literature</button>
+              <button class="filter-tab-btn" data-category="Poetry" role="tab" aria-selected="false">Poetry</button>
+              <button class="filter-tab-btn" data-category="Drama" role="tab" aria-selected="false">Drama</button>
+              <button class="filter-tab-btn" data-category="Novels" role="tab" aria-selected="false">Novels</button>
+              <button class="filter-tab-btn" data-category="Grammar" role="tab" aria-selected="false">Grammar &amp; Rhetoric</button>
+              <button class="filter-tab-btn" data-category="Writing" role="tab" aria-selected="false">Creative Writing</button>
+            </div>
+
+            <div class="library-search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--gold-light);">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="library-search-input" class="library-search-input" placeholder="Search by title, author, or keyword..." aria-label="Search library books" />
+            </div>
+          </div>
+
+          <!-- Bookshelves Container -->
+          <div class="shelf-container" id="bookshelves-container">
+            <!-- Bookshelf Unit 1: Curated Masterworks -->
+            <div class="bookshelf-unit">
+              <div class="shelf-books-row" id="shelf-row-1">
+                <!-- Dynamically rendered via script.js -->
+              </div>
+              <div class="shelf-plank">
+                <span class="shelf-brass-tag">TIER I · THE ENGLISH CANON</span>
+              </div>
+            </div>
+
+            <!-- Bookshelf Unit 2: Poetry, Grammar & Creative Writing -->
+            <div class="bookshelf-unit">
+              <div class="shelf-books-row" id="shelf-row-2">
+                <!-- Dynamically rendered via script.js -->
+              </div>
+              <div class="shelf-plank">
+                <span class="shelf-brass-tag">TIER II · POETRY &amp; RHETORIC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Book Detail Inspection Modal -->
+      <div id="book-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-book-title">
+        <div class="modal-card">
+          <button id="modal-close-btn" class="modal-close-btn" aria-label="Close Book Details">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: flex-start;" id="modal-content-grid">
+            <div id="modal-book-cover-wrap">
+              <!-- Rendered 3D book cover card -->
+            </div>
+            <div>
+              <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem;">
+                <span id="modal-book-genre" class="shelf-book-genre" style="font-size: 0.75rem;">GENRE</span>
+                <span style="color: var(--ink-muted);">·</span>
+                <span id="modal-book-year" style="font-size: 0.75rem; color: var(--gold-light);">1600</span>
+              </div>
+              <h3 id="modal-book-title" style="font-family: var(--font-editorial); font-size: 2rem; margin-bottom: 0.35rem; color: #fff;">Book Title</h3>
+              <p id="modal-book-author" style="font-size: 1rem; color: var(--gold-light); margin-bottom: 1.25rem;">Author Name</p>
+              
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem 0; margin-bottom: 1.25rem;">
+                <h4 style="font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 0.5rem;">Curatorial Synopsis</h4>
+                <p id="modal-book-synopsis" style="font-size: 0.95rem; line-height: 1.65; color: var(--ink-secondary);">Synopsis details.</p>
+              </div>
+
+              <div style="margin-bottom: 1.5rem;">
+                <h4 style="font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 0.5rem;">Notable Quote</h4>
+                <blockquote id="modal-book-quote" style="font-family: var(--font-editorial); font-style: italic; font-size: 1.1rem; color: var(--gold-light); border-left: 2px solid var(--gold-primary); padding-left: 1rem; line-height: 1.5;">“Quote”</blockquote>
+              </div>
+
+              <div style="display: flex; gap: 1rem;">
+                <button id="modal-read-in-tome-btn" class="btn-primary-cta" style="font-size: 0.82rem;">Jump to Theme in 3D Tome</button>
+                <button id="modal-dismiss-btn" class="btn-secondary" style="font-size: 0.82rem;">Return to Shelves</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================================================
+           Section 4: English Literature Explorer (Eras & Authors)
+           ========================================================================== -->
+      <section id="explorer-section" class="explorer-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">Chronicles of English Letters</p>
+            <h2 class="section-title">English Literature Explorer</h2>
+            <p class="section-subtitle text-balance">
+              Journey across over a millennium of literary heritage. Navigate the interactive timeline to examine historical eras, movements, and iconic writers.
+            </p>
+          </div>
+
+          <!-- Era Timeline Navigation Rail -->
+          <div class="timeline-nav-rail" id="era-timeline-rail" role="tablist" aria-label="Literary Eras">
+            <button class="era-node-btn active" data-era="renaissance" role="tab" aria-selected="true">
+              <span class="era-date">1500 – 1660</span>
+              <span class="era-title">Renaissance Drama</span>
+            </button>
+            <button class="era-node-btn" data-era="romantic" role="tab" aria-selected="false">
+              <span class="era-date">1798 – 1837</span>
+              <span class="era-title">Romantic Poetry</span>
+            </button>
+            <button class="era-node-btn" data-era="victorian" role="tab" aria-selected="false">
+              <span class="era-date">1837 – 1901</span>
+              <span class="era-title">Victorian Novel</span>
+            </button>
+            <button class="era-node-btn" data-era="medieval" role="tab" aria-selected="false">
+              <span class="era-date">450 – 1500</span>
+              <span class="era-title">Old &amp; Middle English</span>
+            </button>
+            <button class="era-node-btn" data-era="neoclassical" role="tab" aria-selected="false">
+              <span class="era-date">1660 – 1798</span>
+              <span class="era-title">Neoclassical Era</span>
+            </button>
+            <button class="era-node-btn" data-era="modern" role="tab" aria-selected="false">
+              <span class="era-date">1901 – Present</span>
+              <span class="era-title">Modern &amp; Contemporary</span>
+            </button>
+          </div>
+
+          <!-- Era Spotlight Showcase Container -->
+          <div class="era-spotlight" id="era-spotlight-card">
+            <div class="era-spotlight-img-wrap">
+              <img id="era-spotlight-img" src="/images/shakespeare.jpg" alt="Renaissance Playwright in candlelit London study" class="era-spotlight-img" />
+            </div>
+            <div>
+              <div style="display: flex; gap: 0.6rem; align-items: center; margin-bottom: 0.5rem;">
+                <span id="era-spotlight-period" style="font-family: var(--font-display); font-size: 0.8rem; color: var(--gold-light); letter-spacing: 0.15em;">1500 – 1660 CE</span>
+                <span style="color: var(--ink-muted);">·</span>
+                <span style="font-size: 0.8rem; color: var(--ink-muted);">The Elizabethan &amp; Jacobean Golden Age</span>
+              </div>
+              <h3 id="era-spotlight-title" style="font-size: 2.2rem; margin-bottom: 1rem; color: #fff;">Renaissance &amp; Elizabethan Drama</h3>
+              <p id="era-spotlight-desc" style="font-size: 1.05rem; line-height: 1.7; color: var(--ink-secondary); margin-bottom: 1.5rem;">
+                A rebirth of classical learning, humanist curiosity, and linguistic exuberance. London theatres like the Globe flourished, introducing blank verse tragedy and comedies exploring the depths of human ambition, betrayal, and passion.
+              </p>
+              <div style="background: var(--bg-tertiary); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.35rem; font-family: var(--font-display);">Major Luminaries &amp; Works</div>
+                <div id="era-spotlight-luminaries" style="font-size: 0.9rem; color: var(--ink-primary);">
+                  William Shakespeare (<em>Hamlet</em>, <em>Othello</em>), Christopher Marlowe (<em>Doctor Faustus</em>), Edmund Spenser (<em>The Faerie Queene</em>), John Donne.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Author Profiles Grid -->
+          <div style="margin-top: 4rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.75rem; text-align: center;">Key Authors &amp; Literary Contributors</h3>
+            <div class="authors-grid" id="authors-grid-container">
+              <!-- Dynamically populated via script.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 5: Poetry & Creative Writing Studio
+           ========================================================================== -->
+      <section id="poetry-section" class="poetry-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">The Atelier of Versification</p>
+            <h2 class="section-title">Poetry &amp; Creative Writing Studio</h2>
+            <p class="section-subtitle text-balance">
+              Immerse yourself in poetic meter, metaphor, and stanza structures. Use the line-by-line presentation mode to analyze classic verse or generate creative storytelling prompts.
+            </p>
+          </div>
+
+          <div class="poetry-grid">
+            <!-- Left: Parchment Poem Presentation Mode -->
+            <div class="parchment-poem-card">
+              <div class="poem-header-meta">
+                <span style="font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-crimson);">Interactive Poetry Presentation</span>
+                <h3 class="poem-title-display" id="active-poem-title">Sonnet 18</h3>
+                <p class="poem-author-display" id="active-poem-author">William Shakespeare (1609)</p>
+              </div>
+
+              <!-- Lines Container -->
+              <div class="poem-lines-container" id="poem-lines-box">
+                <!-- Stanzas loaded dynamically -->
+              </div>
+
+              <!-- Active Line Poetic Analysis Callout -->
+              <div class="poem-device-callout" id="poem-analysis-callout">
+                <strong>Click any line above</strong> to reveal its metrical anatomy, figurative devices, and literary significance.
+              </div>
+
+              <div class="poetry-presentation-controls">
+                <button id="poem-prev-line-btn" class="book-nav-btn" style="padding: 0.35rem 0.9rem; font-size: 0.78rem;">← Previous Line</button>
+                <button id="poem-switch-btn" class="btn-secondary" style="padding: 0.35rem 0.9rem; font-size: 0.78rem;">Switch Poem</button>
+                <button id="poem-next-line-btn" class="book-nav-btn" style="padding: 0.35rem 0.9rem; font-size: 0.78rem;">Next Line →</button>
+              </div>
+            </div>
+
+            <!-- Right: Creative Writing Lab & Prompt Studio -->
+            <div class="writing-lab-box">
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--ink-primary);">Creative Writing Prompt Generator</h3>
+                <p style="font-size: 0.9rem; color: var(--ink-secondary); line-height: 1.5;">
+                  Overcome writer's block with curated thematic seeds combining narrative archetypes, conflicts, and poetic constraints.
+                </p>
+              </div>
+
+              <div class="prompt-generator-result" id="prompt-display-card">
+                <span class="prompt-tag" id="prompt-category-tag">Gothic Mystery &amp; Psychological Realism</span>
+                <p class="prompt-text" id="prompt-narrative-text">
+                  “An archivist discovers an unsent letter tucked inside a 1840 edition of Paradise Lost, revealing that an esteemed poet’s most celebrated masterpiece was penned by his sister.”
+                </p>
+                <div style="font-size: 0.78rem; color: var(--gold-light);" id="prompt-constraint-text">
+                  <em>Stylistic Constraint:</em> Write in the first person using an unreliable narrator and at least two extended metaphors.
+                </div>
+              </div>
+
+              <button id="generate-prompt-btn" class="btn-primary-cta" style="width: 100%; text-align: center; justify-content: center; display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                <span>Generate New Literary Prompt</span>
+              </button>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <label for="writing-scratchpad" style="font-size: 0.82rem; font-weight: 600; color: var(--ink-secondary);">Writer's Scratchpad &amp; Draft Space</label>
+                  <span id="scratchpad-word-count" style="font-size: 0.75rem; color: var(--gold-light);" class="tabular-nums">0 words</span>
+                </div>
+                <textarea id="writing-scratchpad" class="writing-scratchpad" placeholder="Draft your poem or prose response here. Your writing is automatically preserved locally..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 6: Grammar Learning Lab & Word of the Day
+           ========================================================================== -->
+      <section id="grammar-section" class="grammar-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">The Mechanics of Eloquence</p>
+            <h2 class="section-title">Grammar Learning Lab</h2>
+            <p class="section-subtitle text-balance">
+              Explore the syntactic and rhetorical pillars of the English language through interactive modules, voice transformation, and daily etymology.
+            </p>
+          </div>
+
+          <!-- Word of the Day Banner -->
+          <div class="wotd-banner">
+            <div>
+              <div style="display: flex; gap: 0.6rem; align-items: center; margin-bottom: 0.4rem;">
+                <span style="font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-light);">Lexical Spotlight · Word of the Day</span>
+                <span style="color: var(--ink-muted);">·</span>
+                <span id="wotd-pos" style="font-size: 0.8rem; color: var(--ink-secondary); font-style: italic;">Adjective</span>
+              </div>
+              <div style="display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.6rem;">
+                <h3 class="wotd-word" id="wotd-word">Verisimilitude</h3>
+                <span class="wotd-ipa" id="wotd-ipa">/ˌver.ɪ.sɪˈmɪl.ɪ.tʃuːd/</span>
+              </div>
+              <p id="wotd-def" style="font-size: 1.05rem; line-height: 1.6; color: var(--ink-primary); margin-bottom: 0.75rem;">
+                The appearance of being true or real; the quality in fiction that makes a narrative seem authentic and believable.
+              </p>
+              <div style="font-size: 0.85rem; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 0.75rem;" id="wotd-example">
+                <em>Example:</em> “Defoe’s minute descriptions of survival tools lend Robinson Crusoe extraordinary verisimilitude.”
+              </div>
+              <div style="font-size: 0.78rem; color: var(--ink-muted);" id="wotd-etymology">
+                <em>Etymology:</em> Latin <em>verisimilitudo</em>, from <em>verus</em> (true) + <em>similis</em> (like/similar).
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1rem; border-left: var(--border-hairline); padding-left: 2rem;">
+              <div style="font-size: 0.85rem;">
+                <span style="color: var(--ink-muted);">Synonyms:</span>
+                <span id="wotd-synonyms" style="color: var(--gold-light); font-weight: 500; margin-left: 0.4rem;">Plausibility, realism, authenticity</span>
+              </div>
+              <div style="font-size: 0.85rem;">
+                <span style="color: var(--ink-muted);">Antonyms:</span>
+                <span id="wotd-antonyms" style="color: var(--ink-secondary); margin-left: 0.4rem;">Improbability, falsehood</span>
+              </div>
+              <button id="next-wotd-btn" class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">
+                <span>Discover Another Word</span>
+                <span aria-hidden="true">↻</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Grammar Modules Tabs -->
+          <div class="grammar-tabs-container" role="tablist" aria-label="Grammar Modules">
+            <button class="grammar-tab-btn active" data-mod="speech" role="tab" aria-selected="true">Parts of Speech</button>
+            <button class="grammar-tab-btn" data-mod="tenses" role="tab" aria-selected="false">Tenses Matrix</button>
+            <button class="grammar-tab-btn" data-mod="voice" role="tab" aria-selected="false">Active vs. Passive</button>
+            <button class="grammar-tab-btn" data-mod="speech-direct" role="tab" aria-selected="false">Direct &amp; Indirect Speech</button>
+            <button class="grammar-tab-btn" data-mod="punctuation" role="tab" aria-selected="false">Punctuation Mastery</button>
+          </div>
+
+          <!-- Interactive Grammar Display Card -->
+          <div class="grammar-interactive-card" id="grammar-content-display">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 7: Interactive English Quiz
+           ========================================================================== -->
+      <section id="quiz-section" class="quiz-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">Academic Self-Assessment</p>
+            <h2 class="section-title">The Scholarly English Quiz</h2>
+            <p class="section-subtitle text-balance">
+              Test your comprehension across literature, grammar, poetics, and vocabulary. Receive immediate academic feedback and merit distinctions.
+            </p>
+          </div>
+
+          <div class="quiz-wrapper">
+            <!-- Category & Difficulty Bar -->
+            <div class="quiz-header-bar">
+              <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <label for="quiz-cat-filter" style="font-size: 0.78rem; color: var(--ink-muted);">Category:</label>
+                <select id="quiz-cat-filter" class="toc-select" style="font-size: 0.78rem; padding: 0.3rem 0.6rem;">
+                  <option value="all">All Disciplines</option>
+                  <option value="literature">Literature</option>
+                  <option value="grammar">Grammar &amp; Syntax</option>
+                  <option value="poetry">Poetry &amp; Prosody</option>
+                  <option value="vocabulary">Vocabulary &amp; Etymology</option>
+                </select>
+
+                <label for="quiz-diff-filter" style="font-size: 0.78rem; color: var(--ink-muted); margin-left: 0.5rem;">Level:</label>
+                <select id="quiz-diff-filter" class="toc-select" style="font-size: 0.78rem; padding: 0.3rem 0.6rem;">
+                  <option value="all">All Difficulties</option>
+                  <option value="easy">Introductory</option>
+                  <option value="medium">Intermediate</option>
+                  <option value="hard">Advanced Scholar</option>
+                </select>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.85rem;">
+                <span style="color: var(--ink-secondary);">High Score: <strong id="quiz-highscore-val" class="tabular-nums text-gold">0%</strong></span>
+                <span style="color: var(--ink-secondary);">Question <strong id="quiz-current-q-num" class="tabular-nums">1</strong> of <strong id="quiz-total-q-num" class="tabular-nums">10</strong></span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
+
+            <!-- Active Question Card -->
+            <div id="quiz-question-container">
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span id="quiz-q-category" style="font-family: var(--font-display); font-size: 0.72rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.12em;">LITERATURE</span>
+                <span style="color: var(--ink-muted);">·</span>
+                <span id="quiz-q-difficulty" style="font-size: 0.72rem; color: var(--ink-muted); text-transform: capitalize;">Medium</span>
+              </div>
+              <h3 class="quiz-question-text" id="quiz-question-title">
+                Loading assessment question...
+              </h3>
+
+              <div class="quiz-options-grid" id="quiz-options-container">
+                <!-- Options rendered dynamically -->
+              </div>
+
+              <!-- Explanation Box -->
+              <div class="quiz-explanation-box" id="quiz-explanation-box">
+                <strong style="color: var(--gold-light); display: block; margin-bottom: 0.25rem;">Academic Analysis:</strong>
+                <p id="quiz-explanation-text">Explanation details.</p>
+              </div>
+
+              <div class="quiz-footer-actions">
+                <button id="quiz-submit-btn" class="btn-primary-cta" style="font-size: 0.85rem;" disabled>Submit Answer</button>
+                <button id="quiz-next-btn" class="btn-secondary" style="font-size: 0.85rem; display: none;">Next Question →</button>
+              </div>
+            </div>
+
+            <!-- Quiz Results Screen -->
+            <div class="quiz-results-card" id="quiz-results-card">
+              <div class="quiz-badge-circle" id="quiz-result-score-circle">100%</div>
+              <h3 style="font-family: var(--font-editorial); font-size: 2.2rem; margin-bottom: 0.5rem; color: #fff;" id="quiz-result-grade">Distinction with Merit</h3>
+              <p style="font-size: 0.85rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.15em; font-family: var(--font-display); margin-bottom: 1rem;" id="quiz-result-badge">Gold Scholar</p>
+              <p style="font-size: 1rem; color: var(--ink-secondary); max-width: 500px; margin: 0 auto 2rem; line-height: 1.6;" id="quiz-result-comment">
+                Exceptional literary mastery! You possess a scholar-level command of English.
+              </p>
+              <div style="display: flex; justify-content: center; gap: 1rem;">
+                <button id="quiz-restart-btn" class="btn-primary-cta">Restart Assessment</button>
+                <a href="#book-section" class="btn-secondary">Revisit 3D Tome</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Section 8: English Department Portal
+           ========================================================================== -->
+      <section id="dept-section" class="dept-section">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-eyebrow">Madha Arts and Science College</p>
+            <h2 class="section-title">Department of English</h2>
+            <p class="section-subtitle text-balance">
+              Nurturing literary insight, critical rhetoric, and communicative excellence at Madha Arts and Science College, Chennai. Meet our dedicated faculty and student initiatives.
+            </p>
+          </div>
+
+          <!-- Department Overview Hero -->
+          <div class="dept-hero-grid">
+            <div>
+              <div style="font-family: var(--font-display); font-size: 0.8rem; color: var(--gold-light); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;">
+                Welcome from the Department Head
+              </div>
+              <h3 style="font-family: var(--font-editorial); font-size: 2.3rem; margin-bottom: 1rem; color: #fff;">
+                “To read deeply is to dwell in the vastest chambers of human experience.”
+              </h3>
+              <p style="font-size: 1.05rem; line-height: 1.7; color: var(--ink-secondary); margin-bottom: 1.25rem;">
+                Welcome to the Department of English at Madha Arts and Science College. Our academic mission is dedicated to cultivating eloquent communication, critical literacy, and deep appreciation for global English literature. We empower students to emerge as confident scholars, creative thinkers, and articulate professionals.
+              </p>
+              <div style="display: flex; gap: 2rem; border-top: var(--border-hairline); padding-top: 1.25rem; font-size: 0.85rem;">
+                <div>
+                  <strong style="color: #fff; display: block;">Department of English</strong>
+                  <span style="color: var(--ink-muted);">Madha Arts and Science College</span>
+                </div>
+                <div>
+                  <strong style="color: #fff; display: block;">University Affiliation</strong>
+                  <span style="color: var(--ink-muted);">Affiliated to University of Madras</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center;">
+              <img src="/images/crest.jpg" alt="Madha Arts and Science College Seal" class="dept-crest-large" />
+            </div>
+          </div>
+
+          <!-- Faculty Directory -->
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">Distinguished Faculty Directory</h3>
+          <div class="faculty-grid">
+            <!-- Faculty 1 -->
+            <div class="faculty-card">
+              <div class="faculty-avatar">EV</div>
+              <h4 class="faculty-name">Dr. Eleanor Vance</h4>
+              <div class="faculty-role">Head of the Department</div>
+              <p class="faculty-spec">Shakespearean Drama, Renaissance Literature &amp; Modern Literary Theory.</p>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Department of English · english@madhaarts.edu.in</div>
+            </div>
+
+            <!-- Faculty 2 -->
+            <div class="faculty-card">
+              <div class="faculty-avatar">AR</div>
+              <h4 class="faculty-name">Dr. Arthur Robinson</h4>
+              <div class="faculty-role">Associate Professor</div>
+              <p class="faculty-spec">Romantic Poetry, British Literature &amp; Environmental Humanities.</p>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Department of English · english@madhaarts.edu.in</div>
+            </div>
+
+            <!-- Faculty 3 -->
+            <div class="faculty-card">
+              <div class="faculty-avatar">CL</div>
+              <h4 class="faculty-name">Dr. Clara Lin</h4>
+              <div class="faculty-role">Assistant Professor</div>
+              <p class="faculty-spec">Indian Writing in English, Victorian Fiction &amp; Sociolinguistics.</p>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Department of English · english@madhaarts.edu.in</div>
+            </div>
+
+            <!-- Faculty 4 -->
+            <div class="faculty-card">
+              <div class="faculty-avatar">MS</div>
+              <h4 class="faculty-name">Julian Sterling, M.F.A.</h4>
+              <div class="faculty-role">Assistant Professor</div>
+              <p class="faculty-spec">Creative Writing, Rhetoric &amp; English Language Teaching (ELT).</p>
+              <div style="font-size: 0.75rem; color: var(--ink-muted);">Department of English · english@madhaarts.edu.in</div>
+            </div>
+          </div>
+
+          <!-- Department Contact & Inquiry Form -->
+          <div class="dept-contact-grid">
+            <div>
+              <div style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.4rem;">
+                Madha Arts and Science College
+              </div>
+              <h3 style="font-family: var(--font-editorial); font-size: 2rem; margin-bottom: 1rem; color: #fff;">Connect with the Department</h3>
+              <p style="font-size: 0.95rem; line-height: 1.6; color: var(--ink-secondary); margin-bottom: 1.5rem;">
+                Have questions regarding Admissions, B.A. or M.A. English programs, or Departmental literary club activities? Reach out to our campus office.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.88rem; color: var(--ink-secondary);">
+                <div><strong>Campus:</strong> Madha Arts and Science College, Madha Nagar, Somangalam Road, Kundrathur, Chennai – 600069</div>
+                <div><strong>Affiliation:</strong> Affiliated to University of Madras</div>
+                <div><strong>Office Hours:</strong> Monday – Saturday: 08:30 – 16:30 IST</div>
+                <div><strong>Email:</strong> english@madhaarts.edu.in</div>
+                <div><strong>Phone:</strong> +91 44 2478 0736 / 0737</div>
+              </div>
+            </div>
+
+            <form id="dept-inquiry-form" onsubmit="event.preventDefault(); window.handleInquirySubmit(event);">
+              <div class="form-group">
+                <label for="inq-name" class="form-label">Full Name *</label>
+                <input type="text" id="inq-name" class="form-input" required placeholder="Your Full Name" />
+              </div>
+              <div class="form-group">
+                <label for="inq-email" class="form-label">Email Address *</label>
+                <input type="email" id="inq-email" class="form-input" required placeholder="scholar@example.com" />
+              </div>
+              <div class="form-group">
+                <label for="inq-program" class="form-label">Academic Program of Interest</label>
+                <select id="inq-program" class="form-input">
+                  <option value="ba-english">B.A. English – Madha Arts and Science College</option>
+                  <option value="ma-english">M.A. English – Madha Arts and Science College</option>
+                  <option value="diploma">Certificate Course in Communicative English</option>
+                  <option value="society">Literary Club &amp; English Association</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inq-message" class="form-label">Message / Inquiry *</label>
+                <textarea id="inq-message" class="form-textarea" rows="3" required placeholder="Please write your inquiry for the English Department..."></textarea>
+              </div>
+              <button type="submit" class="btn-primary-cta" style="width: 100%; text-align: center;">Transmit Departmental Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+         Footer
+         ========================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+              <img src="/images/crest.jpg" alt="Department Crest" style="width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--gold-light);" />
+              <span style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff;">EnglishVerse</span>
+            </div>
+            <p style="font-size: 0.88rem; line-height: 1.6; color: var(--ink-secondary); max-width: 320px;">
+              The digital exhibition space and scholarship nexus of the Department of English, Madha Arts and Science College. Where words become worlds.
+            </p>
+          </div>
+
+          <div>
+            <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 1.25rem;">Academic Arenas</h4>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem;">
+              <li><a href="#book-section" style="color: var(--ink-secondary); text-decoration: none;">3D Interactive Tome</a></li>
+              <li><a href="#library-section" style="color: var(--ink-secondary); text-decoration: none;">Digital Bookshelves</a></li>
+              <li><a href="#explorer-section" style="color: var(--ink-secondary); text-decoration: none;">Literary Timelines</a></li>
+              <li><a href="#poetry-section" style="color: var(--ink-secondary); text-decoration: none;">Poetry Atelier</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 1.25rem;">Learning Labs</h4>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem;">
+              <li><a href="#grammar-section" style="color: var(--ink-secondary); text-decoration: none;">Grammar &amp; Syntax</a></li>
+              <li><a href="#quiz-section" style="color: var(--ink-secondary); text-decoration: none;">Scholarly Quiz</a></li>
+              <li><a href="#dept-section" style="color: var(--ink-secondary); text-decoration: none;">Faculty Directory</a></li>
+              <li><a href="#dept-inquiry-form" style="color: var(--ink-secondary); text-decoration: none;">Admissions Inquiry</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-light); margin-bottom: 1.25rem;">Collegiate Affiliation</h4>
+            <p style="font-size: 0.85rem; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 0.75rem;">
+              Madha Arts and Science College<br />
+              Affiliated to the University of Madras<br />
+              Kundrathur, Chennai – 600069.
+            </p>
+            <div style="font-family: var(--font-editorial); font-style: italic; color: var(--gold-light); font-size: 0.95rem;">
+              “Scientia et Veritas — Knowledge and Truth”
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            © 2026 Department of English, Madha Arts and Science College. All educational rights reserved.
+          </div>
+          <div style="display: flex; gap: 1.5rem;">
+            <span>Privacy Policy</span>
+            <span>Academic Integrity</span>
+            <span>Accessibility Standards</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Return to Top of Page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </button>
+
+    <!-- Main JavaScript Logic -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
